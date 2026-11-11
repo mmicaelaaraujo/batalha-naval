@@ -7,7 +7,7 @@ public class Embarcacao {
     private int acertos;
     private boolean resultado;
 
-// essa etapa representa o construtor, que será "importado" quando construirmos a lógica
+    // essa etapa representa o construtor, que será "importado" quando construirmos a lógica
     public Embarcacao (String nome, int tamanho) {
         this.nome = nome;           // o termos this é utilizado para apontar o objeto que será criado, diferenciando o atributo do parametro do construtor
         this.tamanho = tamanho;     
@@ -15,7 +15,7 @@ public class Embarcacao {
         this.resultado = false;     // enquanto as embarcações não forem encontradas em sua totalidade, o resultado será falso
         
     }
-
+    // Os metodos abaixo são os getters e os settters. Em resumo, os getters pegam o nome aplicado na váriavel para identificar o objeto. Já os setters atualização o valor do objeto atribuído na variável
     public String getNome() {
         return nome;
     }
