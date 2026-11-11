@@ -28,7 +28,6 @@ Neste projeto, utilizamos o padrão **Conventional Commits** para manter o hist�
 | :--- | :--- | :--- |
 | `feat:` | Nova funcionalidade ou componente | `feat: adiciona formulario de contato` |
 | `fix:` | Correção de erro ou bug | `fix: corrige alinhamento do botao no mobile` |
-| `style:` | Mudanças visuais (CSS, margens, cores) sem alterar a lógica | `style: ajusta cores e margens do card` |
 | `docs:` | Alterações na documentação (como o `README.md`) | `docs: atualiza instrucoes de instalacao` |
 | `refactor:` | Reorganização ou melhoria no código sem alterar visual/lógica | `refactor: reorganiza estrutura de pastas das imagens` |
 
