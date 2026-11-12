@@ -1,3 +1,4 @@
+//	Nome, tamanho, partes atingidas e verificacao de afundamento.
 package logica;
 
 // classe que armazena os atributos que cada embarcação terá

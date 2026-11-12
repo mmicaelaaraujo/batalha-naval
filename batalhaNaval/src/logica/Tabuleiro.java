@@ -1,3 +1,4 @@
+//	Matriz, criacao do tabuleiro, posicionamento aleatorio e verificacao de tiros.
 package logica;
 
 import java.util.Random;
