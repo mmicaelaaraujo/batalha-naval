@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 
@@ -100,11 +103,22 @@ public class TelaRegras extends JFrame {
         
 
         setVisible(true); 
-    
+
+        btnContinuar.addActionListener(new ActionListener() {
+        @Override
+            public void actionPerformed(ActionEvent e) {
+                new TelaEscolhaNivel(); 
+                dispose();      
+    }
+});
+
+         
+}
 }
 
-    public JTextArea getTxtRegras() {
-        return txtRegras;
-    }
-}
+
+
+ 
+ 
+
 

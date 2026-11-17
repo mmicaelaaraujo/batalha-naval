@@ -75,13 +75,44 @@ public class Tabuleiro {
                 int coluna = gerador.nextInt(nivelFacil[0].length);
 
                 if (coluna + navio.getTamanho() <= nivelFacil[0].length){   // checa se o navio cabe na horizontal
-                    for (int j = 0; j <navio.getTamanho(); j++){            // preenche a matriz
+                    for (int j = 0; j < navio.getTamanho(); j++){            // preenche a matriz
                         nivelFacil[linha][coluna + j] = 1;
                     }
                     posicionado = true;
                 }
             }
             
+        }
+
+        for (int i = 0; i <naviosIntermediario.length; i++){
+            Embarcacao navio = naviosIntermediario[i];
+            boolean posicionado = false;
+            while(!posicionado){
+                int linha = gerador.nextInt(nivelIntermediario.length);
+                int coluna = gerador.nextInt(nivelIntermediario[0].length);
+
+                if (coluna + navio.getTamanho() <= nivelIntermediario[0].length){
+                    for (int j = 0;j < navio.getTamanho(); j++){
+                        nivelIntermediario[linha][coluna + j] = 1;
+                    }
+                    posicionado = true;
+                }
+            }
+        }
+        for (int i = 0; i <naviosDificil.length; i++){
+            Embarcacao navio = naviosDificil[i];
+            boolean posicionado = false;
+            while(!posicionado){
+                int linha = gerador.nextInt(nivelIntermediario.length);
+                int coluna = gerador.nextInt(nivelIntermediario[0].length);
+
+                if (coluna + navio.getTamanho() <= nivelIntermediario[0].length){
+                    for (int j = 0;j < navio.getTamanho(); j++){
+                        nivelDificil[linha][coluna + j] = 1;
+                    }
+                    posicionado = true;
+                }
+            }
         }
     }
 
