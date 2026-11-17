@@ -1,4 +1,3 @@
-
 package logica;
 
 // Representa uma embarcação do jogo.
@@ -14,13 +13,13 @@ public class Embarcacao {
 
         if (nome == null || nome.isBlank()) { //verifica se uma variável de texto (String) está vazia ou contém apenas espaços em branco.
             throw new IllegalArgumentException(
-                "O nome da embarcação é obrigatório."
+                    "O nome da embarcação é obrigatório."
             );
         }
 
         if (tamanho <= 0) {
             throw new IllegalArgumentException( //Constroi uma excessão que nao esta nas regras do jogo com uma mensagem especifica
-                "O tamanho deve ser maior que zero."
+                    "O tamanho deve ser maior que zero."
             );
         }
 
