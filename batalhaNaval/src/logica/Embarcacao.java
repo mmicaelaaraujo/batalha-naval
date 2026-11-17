@@ -1,45 +1,59 @@
-//	Nome, tamanho, partes atingidas e verificacao de afundamento.
+
 package logica;
 
-// classe que armazena os atributos que cada embarcação terá
+// Representa uma embarcação do jogo.
 public class Embarcacao {
+
+    // Atributos
     private String nome;
     private int tamanho;
     private int acertos;
-    private boolean resultado;
 
-    // essa etapa representa o construtor, que será "importado" quando construirmos a lógica
-    public Embarcacao (String nome, int tamanho) {
-        this.nome = nome;           // o termos this é utilizado para apontar o objeto que será criado, diferenciando o atributo do parametro do construtor
-        this.tamanho = tamanho;     
-        this.acertos = 0;           // toda embarcação começará com os acertos em zero
-        this.resultado = false;     // enquanto as embarcações não forem encontradas em sua totalidade, o resultado será falso
-        
+    // Construtor
+    public Embarcacao(String nome, int tamanho) {
+
+        if (nome == null || nome.isBlank()) { //verifica se uma variável de texto (String) está vazia ou contém apenas espaços em branco.
+            throw new IllegalArgumentException(
+                "O nome da embarcação é obrigatório."
+            );
+        }
+
+        if (tamanho <= 0) {
+            throw new IllegalArgumentException( //Constroi uma excessão que nao esta nas regras do jogo com uma mensagem especifica
+                "O tamanho deve ser maior que zero."
+            );
+        }
+
+        this.nome = nome;
+        this.tamanho = tamanho;
+        this.acertos = 0;
     }
-    // Os metodos abaixo são os getters e os settters. Em resumo, os getters pegam o nome aplicado na váriavel para identificar o objeto. Já os setters atualização o valor do objeto atribuído na variável
+
+    // Retorna o nome da embarcação
     public String getNome() {
         return nome;
     }
 
+    // Retorna o tamanho da embarcação
     public int getTamanho() {
         return tamanho;
     }
 
+    // Retorna a quantidade de acertos
     public int getAcertos() {
         return acertos;
     }
 
-    public boolean getResultado() {
-        return resultado;
+    // Registra um acerto na embarcação
+    public void registrarAcerto() {
+
+        if (acertos < tamanho) {
+            acertos++; // continua contando e acumulando ate acertos ser igual a tamanho
+        }
     }
 
-    public void setAcertos(int novosAcertos) {
-        this.acertos = novosAcertos;
-    } 
-
-    public void setResultado(boolean novoResultado) {
-        this.resultado = novoResultado;
+    // Verifica se todas as partes foram atingidas
+    public boolean estaAfundada() {
+        return acertos == tamanho;
     }
-
 }
-
