@@ -17,14 +17,9 @@ public class TelaEscolhaNivel extends JFrame {
     Color azulBotao = new Color(92, 75, 205);
 
     // Fontes gerais:
-    /* A númeração dentro do parentese diz respeito a um estilo de texto, como normal ou negrito.
-    0 = normal (Plain)
-    1 = Negrito (bold)
-    2 = Itálico (Italic)
-    */
-    Font fonteTitulo = new Font("SansSerif", 1, 48);
-    Font fonteBotao = new Font("SanSerif", 0, 16);
-    Font fonteTexto = new Font("SanSerif", 0, 32);
+    Font fonteTitulo = new Font("SansSerif", Font.BOLD, 48);
+    Font fonteBotao = new Font("SanSerif", Font.PLAIN, 16);
+    Font fonteTexto = new Font("SanSerif", Font.PLAIN, 32);
 
     //Componentes: 
     JLabel lblTitulo = new JLabel("Batalha Naval");
@@ -74,8 +69,7 @@ public class TelaEscolhaNivel extends JFrame {
         setSize(800, 900);
         setLocationRelativeTo(null);
 
-        getContentPane().add(painel);
-
+        //Personalização dos componentes
         lblTitulo.setFont(fonteTitulo);
         lblTitulo.setForeground(azulTexto);
         lblEscolha.setFont(fonteTexto);
@@ -104,6 +98,29 @@ public class TelaEscolhaNivel extends JFrame {
         btnDificil.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
         btnVoltar.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
 
+        btnFacil.addActionListener(e -> {
+        new TelaJogo(1);
+        dispose();
+        });
+
+        btnIntermediario.addActionListener(e -> {
+        new TelaJogo(2);
+        dispose();
+        });
+
+        btnDificil.addActionListener(e -> {
+        new TelaJogo(3);
+        dispose();
+        });
+
+        btnVoltar.addActionListener(e -> {
+        new TelaRegras();
+        dispose();
+        });
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        getContentPane().add(painel);
         setVisible(true);
     }
 }
