@@ -1,4 +1,3 @@
-
 package telas;
 
 import java.awt.Color;
@@ -16,24 +15,20 @@ import javax.swing.*;
 public class TelaJogo extends JFrame {
 
     // Cores gerais
-
     Color azulFundo = new Color(177, 165, 252);
     Color azulTexto = new Color(75, 61, 168);
     Color azulBotao = new Color(92, 75, 205);
     Color azulAgua = new Color(120, 190, 240);
 
     // Fontes
-
-    Font fonteTitulo = new Font("SansSerif", 1, 32);
-    Font fonteTexto = new Font("SansSerif", 1, 18);
-    Font fonteBotao = new Font("SansSerif", 1, 16);
+    Font fonteTitulo = new Font("SansSerif", Font.BOLD, 32);
+    Font fonteTexto = new Font("SansSerif", Font.PLAIN, 18);
+    Font fonteBotao = new Font("SansSerif", Font.PLAIN, 16);
 
     // Componentes
-
     JLabel lblTitulo = new JLabel("Batalha Naval");
     JLabel lblTiros = new JLabel();
     JLabel lblMensagem = new JLabel("Escolha uma posição para atirar!");
-
     JButton[][] botoes;
     String[][] embarcacoes;
     boolean[][] jogadas;
@@ -195,7 +190,7 @@ public class TelaJogo extends JFrame {
         // Configurações da janela
 
         setTitle("Batalha Naval");
-        setSize(800, 850);
+        setSize(900, 1000);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

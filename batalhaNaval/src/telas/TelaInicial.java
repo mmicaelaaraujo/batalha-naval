@@ -75,7 +75,7 @@ public class TelaInicial extends JFrame {
         painel.add(btnSair, regras);
 
         setTitle("Batalha Naval");
-        setSize(800, 900);
+        setSize(900, 1000);
         setLocationRelativeTo(null);
         
 
