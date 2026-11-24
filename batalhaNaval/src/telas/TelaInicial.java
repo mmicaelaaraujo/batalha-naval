@@ -22,30 +22,19 @@ public class TelaInicial extends JFrame {
     Color azulBotao = new Color(92, 75, 205);
 
     // Fontes gerais:
-
-    /* A númeração dentro do parentese diz respeito a um estilo de texto, como normal ou negrito.
-    0 = normal (Plain)
-    1 = Negrito (bold)
-    2 = Itálico (Italic)
-    */
-
-    Font fonteTitulo = new Font("SansSerif", 1, 48);
-    Font fonteDescricao = new Font("SansSerif", 0, 24);
-    Font fonteBotao = new Font("SanSerif", 0, 16);
+    Font fonteTitulo = new Font("SansSerif", Font.BOLD, 48);
+    Font fonteDescricao = new Font("SansSerif", Font.PLAIN, 24);
+    Font fonteBotao = new Font("SanSerif", Font.PLAIN, 16);
     
     // Componentes:
-
     JLabel lblTitulo = new JLabel("Batalha Naval");
     JLabel lblDescricao = new JLabel("Encontre todas as embarcações antes que seus tiros acabem!");
-
     JButton btnIniciar = new JButton("Iniciar");
     JButton btnSair = new JButton("Sair");
 
     public TelaInicial() {
-
         // Adição de painel para a utilização do GridBagLayout. 
         // Essa funcionalidade permite a configuração geral dos elementos da janela, de forma simples e mantendo a responsividade.
-        
         JPanel painel = new JPanel(new GridBagLayout());
         GridBagConstraints regras = new GridBagConstraints();
 
@@ -55,7 +44,6 @@ public class TelaInicial extends JFrame {
         regras.insets = new Insets(10, 10, 10, 10);
 
         // Adição dos componentes da janela:
-
         regras.gridx = 0; 
         regras.gridy = 0;
         painel.add(lblTitulo, regras);
@@ -78,9 +66,6 @@ public class TelaInicial extends JFrame {
         setSize(900, 1000);
         setLocationRelativeTo(null);
         
-
-        getContentPane().add(painel);
-
         // Personalização dos componentes:
 
         lblTitulo.setFont(fonteTitulo);
@@ -119,6 +104,7 @@ public class TelaInicial extends JFrame {
             }
         });
 
+        getContentPane().add(painel);
         setVisible(true);
         
     }
