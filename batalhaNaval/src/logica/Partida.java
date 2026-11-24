@@ -9,7 +9,7 @@ public class Partida {
     private int tirosRestantes;
     private Estado estado = Estado.EM_ANDAMENTO;
 
-    public Partida(int Nivel) {
+    public Partida(int nivel) {
         tabuleiro = new Tabuleiro(nivel);
         tabuleiro.posicionarNavios();
 
@@ -24,12 +24,12 @@ public class Partida {
     }
     public ResultadoTiro atirar(int linha, int coluna) {
         if (estado != Estado.EM_ANDAMENTO) {
-            return ResultadoTiro.REPETIDO;
+            return ResultadoTiro.REPETIDA;
         }
 
-        ResultadoTiro resultado = tabuleiro.atirar(linha, coluna);
+        ResultadoTiro resultado = (ResultadoTiro) tabuleiro.atirar(linha, coluna);
 
-        if (resultado == ResultadoTiro.REPETIDO) {
+        if (resultado == ResultadoTiro.REPETIDA) {
             return resultado;
         }
 

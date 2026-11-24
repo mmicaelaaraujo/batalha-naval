@@ -24,7 +24,7 @@ public class TelaInicial extends JFrame {
     // Fontes gerais:
     Font fonteTitulo = new Font("SansSerif", Font.BOLD, 48);
     Font fonteDescricao = new Font("SansSerif", Font.PLAIN, 24);
-    Font fonteBotao = new Font("SanSerif", Font.PLAIN, 16);
+    Font fonteBotao = new Font("SansSerif", Font.PLAIN, 16);
     
     // Componentes:
     JLabel lblTitulo = new JLabel("Batalha Naval");

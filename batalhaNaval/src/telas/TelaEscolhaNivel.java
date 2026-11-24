@@ -18,8 +18,8 @@ public class TelaEscolhaNivel extends JFrame {
 
     // Fontes gerais:
     Font fonteTitulo = new Font("SansSerif", Font.BOLD, 48);
-    Font fonteBotao = new Font("SanSerif", Font.PLAIN, 16);
-    Font fonteTexto = new Font("SanSerif", Font.PLAIN, 32);
+    Font fonteBotao = new Font("SansSerif", Font.PLAIN, 16);
+    Font fonteTexto = new Font("SansSerif", Font.PLAIN, 32);
 
     //Componentes: 
     JLabel lblTitulo = new JLabel("Batalha Naval");
@@ -102,24 +102,20 @@ public class TelaEscolhaNivel extends JFrame {
         new TelaJogo(1);
         dispose();
         });
-
         btnIntermediario.addActionListener(e -> {
         new TelaJogo(2);
         dispose();
         });
-
         btnDificil.addActionListener(e -> {
         new TelaJogo(3);
         dispose();
         });
-
         btnVoltar.addActionListener(e -> {
         new TelaRegras();
         dispose();
         });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         getContentPane().add(painel);
         setVisible(true);
     }

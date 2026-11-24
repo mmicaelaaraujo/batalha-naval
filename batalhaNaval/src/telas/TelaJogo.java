@@ -187,7 +187,7 @@ public class TelaJogo extends JFrame {
             return;
         }
 
-        JButton botao = botoes[linhas][colunas];
+        JButton botao = botoes[linha][coluna];
             botao.setEnabled(false);
 
         if (resultado == ResultadoTiro.AGUA) {
