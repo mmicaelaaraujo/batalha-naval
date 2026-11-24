@@ -116,9 +116,3 @@ public class TelaRegras extends JFrame {
 }
 }
 
-
-
- 
- 
-
-
