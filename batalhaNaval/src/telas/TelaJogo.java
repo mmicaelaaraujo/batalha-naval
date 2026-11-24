@@ -9,8 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import javax.swing.*;
+import logica.Partida;
+import logica.ResultadoTiro;
 
 public class TelaJogo extends JFrame {
 
@@ -28,50 +29,30 @@ public class TelaJogo extends JFrame {
     // Componentes
     JLabel lblTitulo = new JLabel("Batalha Naval");
     JLabel lblTiros = new JLabel();
-    JLabel lblMensagem = new JLabel("Escolha uma posição para atirar!");
+    JLabel lblMensagem = new JLabel(" ");
     JButton[][] botoes;
-    String[][] embarcacoes;
-    boolean[][] jogadas;
-
+    
+    Partida partida;
     int tamanho;
-    int tirosRestantes;
-    int totalPartes = 0;
-    int partesAcertadas = 0;
-
-    Random sorteio = new Random();
 
     // Construtor
 
     public TelaJogo() {
-        this("facil");
+        this (1);
     }
 
-    public TelaJogo(String nivel) {
+    public TelaJogo(int nivel) {
 
-        // Definindo o tamanho do tabuleiro e os tiros
+        // Criação da partida junto dos tabuleiros e atribuição dos navios
 
-        if (nivel.equalsIgnoreCase("dificil")) {
+        partida = new Partida(nivel);
+        tamanho = partida.getTabuleiro().getTamanho();
 
-            tamanho = 8;
-            tirosRestantes = 40;
 
-        } else if (nivel.equalsIgnoreCase("intermediario")) {
-
-            tamanho = 7;
-            tirosRestantes = 35;
-
-        } else {
-
-            tamanho = 6;
-            tirosRestantes = 30;
-
-        }
-
-        // Criando as matrizes
+        // Criação da matriz de botões
 
         botoes = new JButton[tamanho][tamanho];
-        embarcacoes = new String[tamanho][tamanho];
-        jogadas = new boolean[tamanho][tamanho];
+        
 
         // Painel principal
 
@@ -183,10 +164,6 @@ public class TelaJogo extends JFrame {
 
         });
 
-        // Sorteando as posições das embarcações
-
-        posicionarEmbarcacoes();
-
         // Configurações da janela
 
         setTitle("Batalha Naval");
@@ -200,213 +177,71 @@ public class TelaJogo extends JFrame {
 
     }
 
-    // Método para posicionar as embarcações
-
-    public void posicionarEmbarcacoes() {
-
-        int[] tamanhos;
-        int[] quantidades;
-
-        if (tamanho == 6) {
-
-            tamanhos = new int[]{1, 2, 3, 4, 5};
-            quantidades = new int[]{4, 2, 1, 1, 1};
-
-        } else if (tamanho == 7) {
-
-            tamanhos = new int[]{1, 2, 3, 4, 5};
-            quantidades = new int[]{4, 3, 1, 1, 1};
-
-        } else {
-
-            tamanhos = new int[]{1, 2, 3, 4, 5};
-            quantidades = new int[]{6, 2, 2, 2, 1};
-
-        }
-
-        String[] nomes = {
-            "Submarino",
-            "Destroier",
-            "Cruzador",
-            "Encouraçado",
-            "Porta-aviões"
-        };
-
-        for (int i = 0; i < nomes.length; i++) {
-
-            for (int j = 0; j < quantidades[i]; j++) {
-
-                boolean posicionado = false;
-
-                while (!posicionado) {
-
-                    int linha = sorteio.nextInt(tamanho);
-                    int coluna = sorteio.nextInt(tamanho);
-
-                    boolean horizontal = sorteio.nextBoolean();
-
-                    int fimLinha = linha;
-                    int fimColuna = coluna;
-
-                    if (horizontal) {
-
-                        fimColuna = coluna + tamanhos[i] - 1;
-
-                    } else {
-
-                        fimLinha = linha + tamanhos[i] - 1;
-
-                    }
-
-                    // Verifica se a embarcação cabe no tabuleiro
-
-                    if (fimLinha >= tamanho || fimColuna >= tamanho) {
-                        continue;
-                    }
-
-                    boolean livre = true;
-
-                    // Verifica se as casas estão livres
-
-                    for (int k = 0; k < tamanhos[i]; k++) {
-
-                        int l;
-                        int c;
-
-                        if (horizontal) {
-
-                            l = linha;
-                            c = coluna + k;
-
-                        } else {
-
-                            l = linha + k;
-                            c = coluna;
-
-                        }
-
-                        if (embarcacoes[l][c] != null) {
-
-                            livre = false;
-                            break;
-
-                        }
-
-                    }
-
-                    // Guarda a embarcação na matriz
-
-                    if (livre) {
-
-                        for (int k = 0; k < tamanhos[i]; k++) {
-
-                            int l;
-                            int c;
-
-                            if (horizontal) {
-
-                                l = linha;
-                                c = coluna + k;
-
-                            } else {
-
-                                l = linha + k;
-                                c = coluna;
-
-                            }
-
-                            embarcacoes[l][c] = nomes[i];
-
-                            totalPartes++;
-
-                        }
-
-                        posicionado = true;
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
     // Método para realizar os tiros
 
     public void realizarJogada(int linha, int coluna) {
 
-        if (jogadas[linha][coluna]) {
+        ResultadoTiro resultado = partida.atirar(linha, coluna);
+
+        if (resultado == ResultadoTiro.REPETIDA) {
             return;
         }
 
-        jogadas[linha][coluna] = true;
+        JButton botao = botoes[linhas][colunas];
+            botao.setEnabled(false);
 
-        tirosRestantes--;
+        if (resultado == ResultadoTiro.AGUA) {
 
-        if (embarcacoes[linha][coluna] != null) {
+        botao.setText("~");
+        botao.setBackground(Color.GRAY);
+        lblMensagem.setText("Tiro na água!");
 
-            // Quando o jogador acerta uma embarcação
+    } else {
 
-            partesAcertadas++;
+        String nome = partida.getTabuleiro().getEmbarcacaoEm(linha, coluna).getNome();
 
-            botoes[linha][coluna].setText("X");
-            botoes[linha][coluna].setBackground(Color.RED);
+        botao.setText("X");
+        botao.setBackground(Color.RED);
 
-            lblMensagem.setText(
-                "Acertou! " + embarcacoes[linha][coluna]
-            );
-
+        if (resultado == ResultadoTiro.AFUNDOU) {
+            lblMensagem.setText("Você afundou o " + nome + "!");
         } else {
-
-            // Quando o jogador acerta a água
-
-            botoes[linha][coluna].setText("~");
-            botoes[linha][coluna].setBackground(Color.GRAY);
-
-            lblMensagem.setText("Tiro na água!");
-
+            lblMensagem.setText("Acertou um " + nome + "!");
         }
-
-        botoes[linha][coluna].setEnabled(false);
-
-        atualizarTiros();
-
-        // Verifica se o jogador ganhou
-
-        if (partesAcertadas == totalPartes) {
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Parabéns! Você encontrou todas as embarcações!",
-                "Vitória",
-                JOptionPane.INFORMATION_MESSAGE
-            );
-
-            bloquearTabuleiro();
-
-        } else if (tirosRestantes == 0) {
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Seus tiros acabaram! Você perdeu!",
-                "Fim de jogo",
-                JOptionPane.INFORMATION_MESSAGE
-            );
-
-            bloquearTabuleiro();
-
-        }
-
     }
+
+    atualizarTiros();
+
+    if (partida.getEstado() == Partida.Estado.VITORIA) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Parabéns! Você encontrou todas as embarcações!",
+            "Vitória",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+        bloquearTabuleiro();
+
+    } else if (partida.getEstado() == Partida.Estado.DERROTA) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Seus tiros acabaram! Você perdeu!",
+            "Fim de jogo",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+        bloquearTabuleiro();
+    }
+}
 
     // Atualiza a quantidade de tiros
 
     public void atualizarTiros() {
 
         lblTiros.setText(
-            "Tiros restantes: " + tirosRestantes
+            "Tiros restantes: " + partida.getTirosRestantes()
         );
 
     }
